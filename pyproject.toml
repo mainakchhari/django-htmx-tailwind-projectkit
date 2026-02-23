@@ -1,0 +1,30 @@
+[project]
+name = "django-htmx-tailwind"
+dynamic = ["version"]
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "django>=6.0",
+  "django-environ>=0.13.0",
+  "django-htmx>=1.27.0",
+  "django-rich>=2.2.0",
+  "gunicorn>=23.0.0",
+  "gunicorn-color>=0.1.0",
+  "pytailwindcss>=0.2.0",
+  "whitenoise[brotli]>=6.9.0",
+]
+
+[project.scripts]
+app-admin = "manage:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+dev-mode-dirs = ["src"]
+packages = ["src/config"]
+
+[tool.hatch.version]
+path = "src/config/__about__.py"

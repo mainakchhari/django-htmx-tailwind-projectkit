@@ -1,0 +1,4 @@
+!.helix/
+uv.lock
+staticfiles/
+static/output/

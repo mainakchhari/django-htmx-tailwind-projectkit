@@ -1,0 +1,7 @@
+[[language]]
+name = "html"
+auto-format = true
+formatter = { command = "djlint", args = ["-", "--reformat", "--quiet"] }
+
+[language-server.djlsp.config]
+django_settings_modules="config.settings"

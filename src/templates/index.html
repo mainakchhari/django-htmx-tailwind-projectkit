@@ -1,0 +1,64 @@
+<!-- templates/index.html -->
+{% extends "_base.html" %} {% load static %} {% block content %}
+<div class="border bg-blue-50 border-blue-900 rounded-md p-4 m-4">
+    <h1 class="text-3xl font-bold text-blue-900">
+        "Lorem Ipsum" - 1914 translation by H. Rackham
+    </h1>
+    <hr class="border-blue-900 text-blue-900 my-4" />
+    <p class="font-normal text-blue-950">
+        "But I must explain to you how all this mistaken idea of denouncing
+        pleasure and praising pain was born and I will give you a complete
+        account of the system, and expound the actual teachings of the great
+        explorer of the truth, the master-builder of human happiness. No one
+        rejects, dislikes, or avoids pleasure itself, because it is pleasure,
+        but because those who do not know how to pursue pleasure rationally
+        encounter consequences that are extremely painful. Nor again is there
+        anyone who loves or pursues or desires to obtain pain of itself, because
+        it is pain, but because occasionally circumstances occur in which toil
+        and pain can procure him some great pleasure. To take a trivial example,
+        which of us ever undertakes laborious physical exercise, except to
+        obtain some advantage from it? But who has any right to find fault with
+        a man who chooses to enjoy a pleasure that has no annoying consequences,
+        or one who avoids a pain that produces no resultant pleasure?"
+    </p>
+</div>
+<div class="border bg-blue-50 border-blue-900 rounded-md p-4 m-4">
+    <div class="flex items-center">
+        <h1 class="text-3xl inline-block font-bold text-blue-900">
+            Joke API V2 (HTMX in action)
+        </h1>
+        <span class="grow"></span>
+        <button
+            hx-target="#output"
+            class="float-right rounded-md bg-blue-800 p-2 text-blue-50 hover:bg-blue-700 transition"
+            hx-get="https://v2.jokeapi.dev/joke/Any?format=txt&safe-mode"
+        >
+            Hear a joke
+        </button>
+    </div>
+
+    <div class="[&:has(#output:empty)]:hidden">
+        <hr class="border-blue-900 my-4" />
+
+        <blockquote
+            class="my-4 font-bold text-blue-950 text-3xl md:text-5xl text-center px-8 flex items-start justify-center"
+        >
+            <img
+                src="{% static 'quote-left.svg' %}"
+                alt="Quote start"
+                class="w-8 h-8 md:w-10 md:h-10 shrink-0"
+                aria-hidden="true"
+            />
+
+            <span id="output" class="whitespace-pre-wrap"></span>
+
+            <img
+                src="{% static 'quote-right.svg' %}"
+                alt="Quote end"
+                class="w-8 h-8 md:w-10 md:h-10 shrink-0 self-end"
+                aria-hidden="true"
+            />
+        </blockquote>
+    </div>
+</div>
+{% endblock content %}

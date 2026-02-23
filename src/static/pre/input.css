@@ -1,0 +1,7 @@
+@import url("https://api.fontshare.com/v2/css?f[]=synonym@200,300,400,500&f[]=amulya@700,701&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-bold: "Amulya", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Synonym", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}

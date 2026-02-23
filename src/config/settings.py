@@ -1,0 +1,139 @@
+from pathlib import Path
+import environ
+
+env = environ.Env(
+    DEBUG=(bool, False), # fail-safe for production
+    SECRET_KEY=(str, '{{ secret_key|default:"django-insecure-_ik#x#f4&-!8o-#+l^&9jczgqcwu)sp24w#zw(s+0cfk-la$ca" }}'),
+    TIME_ZONE=(str, 'UTC')
+)
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Read .env file if exists in BASE_DIR
+ENV_FILE = BASE_DIR / '.env'
+if ENV_FILE.exists():
+    environ.Env.read_env(ENV_FILE)
+
+# For production, see https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+
+SECRET_KEY = env('SECRET_KEY')
+
+DEBUG = env('DEBUG')
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+
+
+# Application definition
+
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
+    "django.contrib.staticfiles",
+    "django_rich",
+    "django_htmx",
+]
+
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
+]
+
+ROOT_URLCONF = "config.urls"
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = "config.wsgi.application"
+
+
+# Database
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
+
+# Password validation
+# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/5.1/topics/i18n/
+
+LANGUAGE_CODE = "en-us"
+
+TIME_ZONE = env('TIME_ZONE')
+
+USE_I18N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static" / "css",
+    BASE_DIR / "static" / "images",
+]
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# django-rich integrated test runner
+TEST_RUNNER = "django_rich.test.RichRunner"
