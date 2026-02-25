@@ -9,8 +9,6 @@ dependencies = [
   "django-environ>=0.13.0",
   "django-htmx>=1.27.0",
   "django-rich>=2.2.0",
-  "gunicorn>=23.0.0",
-  "gunicorn-color>=0.1.0",
   "pytailwindcss>=0.2.0",
   "whitenoise[brotli]>=6.9.0",
 ]
