@@ -22,7 +22,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build]
 dev-mode-dirs = ["src"]
-packages = ["src/config"]
+packages = ["src/{{ project_name }}"]
 
 [tool.hatch.version]
-path = "src/config/__about__.py"
+path = "src/{{ project_name }}/__about__.py"

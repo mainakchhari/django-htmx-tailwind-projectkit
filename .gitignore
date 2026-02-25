@@ -69,7 +69,7 @@ cover/
 
 # Django stuff:
 ## Staticfiles
-static/output/
+src/static/css/main.css
 staticfiles/
 
 # Flask stuff:

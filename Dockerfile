@@ -4,7 +4,6 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /app
 
 # 1. Install pure app dependencies from the lockfile into /app/.venv
-# (This keeps your pyproject.toml totally clean of deployment tools)
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
@@ -17,7 +16,7 @@ RUN VIRTUAL_ENV=/app/.venv uv pip install gunicorn gunicorn-color
 FROM python:slim
 WORKDIR /app
 
-# Create a non-root user (This gives you the same security as the benoitc image)
+# Create a non-root user (same security as official gunicorn image)
 RUN useradd --create-home appuser
 USER appuser
 
@@ -28,7 +27,8 @@ COPY --chown=appuser:appuser src/ .
 # Prioritize the virtual environment in the system path
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Static files & migrations
+# CSS precompile & collect static
+RUN tailwindcss -i static/pre/input.css -o static/css/main.css --minify
 RUN ./manage.py collectstatic --noinput
 
 # Run your app via the injected Gunicorn
