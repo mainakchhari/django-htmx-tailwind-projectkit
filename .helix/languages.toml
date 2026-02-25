@@ -3,5 +3,5 @@ name = "html"
 auto-format = true
 formatter = { command = "djlint", args = ["-", "--reformat", "--quiet"] }
 
-[language-server.djlsp.config]
-django_settings_modules="config.settings"
+[language-server.djlsp.{{ project_name }}]
+django_settings_modules="{{ project_name }}.settings"
