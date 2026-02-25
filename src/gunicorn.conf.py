@@ -4,7 +4,7 @@
 import gunicorn_color
 
 bind = "0.0.0.0:8000"
-wsgi_app = "config.wsgi:application"
+wsgi_app = "{{ project_name }}.wsgi:application"
 workers = 2
 threads = 4
 control_socket = "/tmp/gunicorn.ctl"
