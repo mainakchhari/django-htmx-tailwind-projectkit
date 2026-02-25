@@ -25,8 +25,9 @@ The `TEMPLATE_ZIP_URL` should be the path to the latest release artifact, unless
 
 - copy `.env.dist` to `.env` and get started with `app-admin runserver`
 - Uses uv for python tooling. Run `uv sync` to install app and deps
-- Run migrations and start local server with `app-admin` (wrapper over [manage.py](src/manage.py))
 - Run `tailwindcss -i static/pre/input.css -o static/css/main.css --watch` during dev to auto-preprocess css changes to output; run with --minify instead of --watch in production
+- Run migrations and start local server with `app-admin` (wrapper over [manage.py](src/manage.py))
+- Open browser and navigate to `http://localhost:8000` - voila!
 - Ships with some opinionated deps - environ, htmx, tailwind
 - whitenoise serves assets in production (needs collectstatic)
 
@@ -43,7 +44,8 @@ This is an opinionated template focused on ease of use and good practices:
 
 ## Production
 
-- run app-admin check --deploy before you running in production
+- the provided Dockerfile is optimized for production
+- run `app-admin check --deploy` when you start planning for production
 - versioning is maintained through `src/{{ project_name }}/__about__.py` -- single point of configuration
 
 ## todo
